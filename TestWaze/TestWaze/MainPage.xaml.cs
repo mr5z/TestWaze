@@ -30,22 +30,23 @@ namespace TestWaze
 
         private LatLng Parse(string text)
         {
-            if (!string.IsNullOrEmpty(text))
-            {
-                var geolocation = text.Split(',');
-                if (geolocation.Length < 2)
-                    return null;
+            if (string.IsNullOrEmpty(text))
+                return null;
+                
+            var geolocation = text.Split(',');
+            if (geolocation.Length < 2)
+                return null;
 
-                if (double.TryParse(geolocation[0], out var latitude) && 
-                    double.TryParse(geolocation[1], out var longitude))
+            if (double.TryParse(geolocation[0], out var latitude) && 
+                double.TryParse(geolocation[1], out var longitude))
+            {
+                return new LatLng
                 {
-                    return new LatLng
-                    {
-                        Latitude = latitude,
-                        Longitude = longitude
-                    };
-                }
+                    Latitude = latitude,
+                    Longitude = longitude
+                };
             }
+            
             return null;
         }
 
